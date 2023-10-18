@@ -47,7 +47,7 @@
       socket.on("connectedRoom", (data) => {
         const userCardsContainer = document.getElementById("user-cards");
         userCardsContainer.innerHTML = "";
-        popup.innerHTML = "";
+  //      popup.innerHTML = "";
         data.forEach((user) => {
           const userCard = document.createElement("div");
           userCard.className = "card";
