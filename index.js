@@ -12,7 +12,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const port = process.env.PORT || 3003;
-//const uri = "mongodb+srv://sanjana:k75ivClntpqHzNHd@data.hfufl7g.mongodb.net/?retryWrites=true&w=majority"; 
 const usersInRoom = new Map();
 const client = new MongoClient(process.env.uri, {
   useNewUrlParser: true,
