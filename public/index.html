@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Submit Your Data</h2>
+      <form action="/createuser" method="POST">
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" required><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" required><br>
+        <label for="mob">Mobile No:</label><br>
+        <input type="text" id="mob" name="mob" pattern="[0-9]{10}" title="Mobile No must be 10 digits" required><br>
+        <label for="email">Email Id:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="add">Address:</label><br>
+        <input type="text" id="addstr" name="str" placeholder="Street"  required /><br>
+        <input type="text" id="addci" name="city" placeholder="City"    required /><br>
+        <input type="text" id="addst" name="stat" placeholder="State"   required /><br>
+        <input type="text" id="addcont" name="cont" placeholder="Country"   required /><br>
+        <label for="login">Login Id:</label><br>
+        <input type="text" id="login" name="login" pattern="^[A-Za-z0-9@]{8,}$" title="Login Id must be 8 characters alpha numeric" required><br>
+        <label for="PASS">Password:</label><br>
+        <input type="password" id="pass" name="pass" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$" title="Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character" required><br><br>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </body>
+</html>

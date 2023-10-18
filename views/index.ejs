@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live_User</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: auto;
+        grid-gap: 1rem;
+      }
+      .card {
+        border: 1px solid black;
+        width: 300px;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .user-details {
+        font-weight: bold;
+      }
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: cornsilk;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live_User</h1>
+    <div class="container" id="user-cards">
+    </div>
+    <div class="popup" id="popup">
+      <button id="close">Close</button>
+  </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      socket.on("connectedRoom", (data) => {
+        const userCardsContainer = document.getElementById("user-cards");
+        userCardsContainer.innerHTML = "";
+        popup.innerHTML = "";
+        data.forEach((user) => {
+          const userCard = document.createElement("div");
+          userCard.className = "card";
+          userCard.innerHTML = `
+                <p class="user-details">Socket Id: ${user.sock}</p>
+                <p class="user-details">Email: ${user.email}</p>
+            `;
+          userCard.addEventListener("click", () => {
+            console.log("Card clicked!");
+            const clickedEmail = user.email;
+            fetch(`/user?email=${clickedEmail}`)
+              .then((response) => response.json())
+              .then((data) => {
+                popup.innerHTML = "";
+                const userDetailsCard = document.createElement("div");
+                userDetailsCard.className = "card";
+                userDetailsCard.innerHTML = `
+                <p class="user-details">Name: ${data.fname} ${data.lname}</p>
+                    <p class="user-details">Mob No: ${data.mobile}</p>
+                    <p class="user-details">EmailId: ${data.email}</p>
+                    <p class="user-details">Address: ${data.Address}</p>
+                    <p class="user-details">LoginId: ${data.loginId}</p>
+                    <p class="user-details">Password: ${data.password}</p>
+                    <p class="user-details">CreatedAt: ${data.createdAt}</p>
+                    <button id="close">Close</button>
+                `;
+                userDetailsCard.addEventListener("click", () => {
+                  popup.style.display = "none";
+                });
+                popup.appendChild(userDetailsCard);
+                popup.style.display = "block";
+                console.log(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+            const popup = document.getElementById("popup");
+          });
+          userCardsContainer.appendChild(userCard);
+        });
+      });
+    </script>
+  </body>
+</html>

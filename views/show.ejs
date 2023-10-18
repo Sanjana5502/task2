@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display the Database</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    </style>
+</head>
+<body>
+    <h2>Show Data</h2>
+    <table id="Form">
+        <tr>
+            <th>fname</th>
+            <th>lname</th>
+            <th>mobile</th>
+            <th>email</th>
+            <th>address</th>
+            <th>street</th>
+            <th>city</th>
+            <th>state</th>
+            <th>country</th>
+            <th>loginid</th>
+            <th>password</th>
+            <th>ctreated time</th>
+            <th>Last Update On</th>
+          </tr>
+    <%   for(let item of items){%>
+    <tr>  <th><%= item.fname %></th>
+        <th><%= item.lname %></th>
+        <th><%= item.mobile %></th>
+        <th><%= item.email %></th>
+        <th><%= item.address %></th>
+        <th><%= item.street %></th>
+        <th><%= item.city %></th>
+        <th><%= item.state %></th>
+        <th><%= item.country %></th>
+        <th><%= item.login %></th>
+        <th><%= item.password %></th>
+        <th><%= item.creationTime %></th>
+        <th><%= item.lastUpdatedOn %></th>
+        </tr>
+    <% } %>
+</table>   
+<!-- <script>
+  $(document).ready(function(){
+      $.ajax({
+          type: 'GET',
+          url: '/show',
+          success: function(data){
+              data.forEach(function(item){
+                  $('#Form').append('<tr><td>' + item.fname + '</td><td>' + item.lname + '</td><td>' + item.mobile + '</td><td>' + item.email + '</td><td>' + item.address + '</td><td>' + item.street + '</td><td>' + item.city + '</td><td>' + item.state + '</td><td>' + item.country + '</td><td>' + item.login + '</td><td>' + item.password + '</td></tr>');
+              });
+          },
+          contentType: 'application/json'
+      });
+  });
+</script>     -->       
+</body>
+</html>
